@@ -21,6 +21,9 @@ import android.widget.Toast;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -62,7 +65,30 @@ public class MainActivity extends AppCompatActivity {
 
         textView.setText(data);
 
+        timer = new Timer();
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                TextView textView = findViewById(R.id.messageTextView);
+
+                String data = "This app has been created by moutamid_waseem on fiverr\n"
+                        + "NUMBER: " + sp.getString("msg_from", "null") + "\n"
+                        + "MESSAGE: " + sp.getString("msgBody", "null");
+
+                textView.setText(data);
+            }
+        };
+        timer.schedule(timerTask, 100, 200);
 //        registerReceiver();
+    }
+
+    Timer timer;
+    TimerTask timerTask;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        timer.cancel();
     }
 
     @Override

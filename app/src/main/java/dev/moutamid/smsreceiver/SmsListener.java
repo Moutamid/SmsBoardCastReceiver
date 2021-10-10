@@ -43,6 +43,12 @@ public class SmsListener extends BroadcastReceiver {
                         Log.d(TAG, "onReceive: msgBody: " + msgBody);
                         sp.edit().putString("msg_from", msg_from).apply();
                         sp.edit().putString("msgBody", msgBody).apply();
+                        NotificationHelper notificationHelper = new NotificationHelper(context);
+                        notificationHelper.sendHighPriorityNotification(
+                                "You a got a notification!",
+                                "Received a new message!",
+                                MainActivity.class
+                        );
 //                        Toast.makeText(context, msg_from, Toast.LENGTH_SHORT).show();
 //                        Toast.makeText(context, msgBody, Toast.LENGTH_SHORT).show();
                     }
