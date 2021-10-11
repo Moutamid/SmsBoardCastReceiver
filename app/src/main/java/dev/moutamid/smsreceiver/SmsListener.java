@@ -35,10 +35,12 @@ public class SmsListener extends BroadcastReceiver {
                 try {
                     Object[] pdus = (Object[]) bundle.get("pdus");
                     msgs = new SmsMessage[pdus.length];
+                    String msgBody = "";
+
                     for (int i = 0; i < msgs.length; i++) {
                         msgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
                         msg_from = msgs[i].getOriginatingAddress();
-                        String msgBody = msgs[i].getMessageBody();
+                        msgBody = msgBody + msgs[i].getMessageBody();
                         Log.d(TAG, "onReceive: msg_from: " + msg_from);
                         Log.d(TAG, "onReceive: msgBody: " + msgBody);
                         sp.edit().putString("msg_from", msg_from).apply();
@@ -49,6 +51,8 @@ public class SmsListener extends BroadcastReceiver {
                                 "Received a new message!",
                                 MainActivity.class
                         );
+//                        if (i == 0)
+//                            break;
 //                        Toast.makeText(context, msg_from, Toast.LENGTH_SHORT).show();
 //                        Toast.makeText(context, msgBody, Toast.LENGTH_SHORT).show();
                     }

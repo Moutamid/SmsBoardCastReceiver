@@ -6,14 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/messageTextView"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:layout_marginHorizontal="20dp"
-        android:text="You have received a message from 76598346 and the message is this this this" />
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/messageTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="center"
+            android:text="You have received a message from 76598346 and the message is this this this"
+            android:textSize="20sp" />
+
+    </ScrollView>
 
 </RelativeLayout>
