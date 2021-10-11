@@ -69,16 +69,35 @@ public class MainActivity extends AppCompatActivity {
         timerTask = new TimerTask() {
             @Override
             public void run() {
-                TextView textView = findViewById(R.id.messageTextView);
 
-                String data = "This app has been created by moutamid_waseem on fiverr\n"
-                        + "NUMBER: " + sp.getString("msg_from", "null") + "\n"
-                        + "MESSAGE: " + sp.getString("msgBody", "null");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        TextView textView1 = findViewById(R.id.messageTextView);
 
-                textView.setText(data);
+                        try {
+                            SharedPreferences sp1 = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                            String data = "This app has been created by moutamid_waseem on fiverr\n"
+                                    + "NUMBER: " + sp1.getString("msg_from", "null") + "\n"
+                                    + "MESSAGE: " + sp1.getString("msgBody", "null");
+
+                            textView1.setText(data);
+
+                        } catch (Exception e) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(MainActivity.this, "ERROR: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+
+                    }
+                });
+
             }
         };
-        timer.schedule(timerTask, 100, 200);
+        timer.schedule(timerTask, 1000, 200);
 //        registerReceiver();
     }
 
