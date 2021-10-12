@@ -59,9 +59,12 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.messageTextView);
 
-        String data = "This app has been created by moutamid_waseem on fiverr\n"
-                + "NUMBER: " + sp.getString("msg_from", "null") + "\n"
+        String data = "NUMBER: " + sp.getString("msg_from", "null") + "\n"
                 + "MESSAGE: " + sp.getString("msgBody", "null");
+
+        /*String data = "This app has been created by moutamid_waseem on fiverr\n"
+                + "NUMBER: " + sp.getString("msg_from", "null") + "\n"
+                + "MESSAGE: " + sp.getString("msgBody", "null");*/
 
         textView.setText(data);
 
@@ -77,9 +80,12 @@ public class MainActivity extends AppCompatActivity {
 
                         try {
                             SharedPreferences sp1 = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-                            String data = "This app has been created by moutamid_waseem on fiverr\n"
+        /*                    String data = "This app has been created by moutamid_waseem on fiverr\n"
                                     + "NUMBER: " + sp1.getString("msg_from", "null") + "\n"
                                     + "MESSAGE: " + sp1.getString("msgBody", "null");
+*/
+                            String data = "NUMBER: " + sp.getString("msg_from", "null") + "\n"
+                                    + "MESSAGE: " + sp.getString("msgBody", "null");
 
                             textView1.setText(data);
 
@@ -115,55 +121,15 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         TextView textView = findViewById(R.id.messageTextView);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+/*
         String data = "This app has been created by moutamid_waseem on fiverr\n"
                 + "NUMBER: " + sp.getString("msg_from", "null") + "\n"
                 + "MESSAGE: " + sp.getString("msgBody", "null");
+*/
+        String data = "NUMBER: " + sp.getString("msg_from", "null") + "\n"
+                + "MESSAGE: " + sp.getString("msgBody", "null");
 
         textView.setText(data);
-    }
-
-    // FOR SCREEN TURN ON BROADCAST RECEIVER
-    private void registerReceiver() {
-
-        final IntentFilter theFilter = new IntentFilter();
-
-        theFilter.addAction(Intent.ACTION_SCREEN_ON);
-        theFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        theFilter.addAction(Intent.ACTION_USER_PRESENT);
-
-        BroadcastReceiver screenOnOFReceiver1 = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-
-                String strAction = intent.getAction();
-
-                KeyguardManager kgMgr = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
-
-                if (strAction.equals(Intent.ACTION_SCREEN_OFF)) {
-
-                }
-                if (strAction.equals(Intent.ACTION_SCREEN_ON)) {
-
-                }
-                if (strAction.equals(Intent.ACTION_SCREEN_OFF)) {
-
-                }
-                if (strAction.equals(Intent.ACTION_USER_PRESENT) && !kgMgr.inKeyguardRestrictedInputMode()) {
-                    // DEVICE UN-LOCKED
-
-                    Toast.makeText(context, "UNLOCKED!", Toast.LENGTH_SHORT).show();
-//                    int resID = getResources().getIdentifier("whistle", "raw", getPackageName());
-
-//                    MediaPlayer mediaPlayer = MediaPlayer.create(context, resID);
-//                    mediaPlayer.start();
-
-                } else {
-                    // DEVICE LOCKED
-                }
-
-            }
-        };
-        getApplicationContext().registerReceiver(screenOnOFReceiver1, theFilter);
     }
 
 }
